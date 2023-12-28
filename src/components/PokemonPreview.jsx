@@ -1,9 +1,11 @@
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { colorByType } from "../constants/pokemon"
+import { PokemonContext } from "../context/PokemonContext"
 
 const PokemonReview = ({ pokemonURL }) => {
 
+  const { showPokemonById } = useContext(PokemonContext)
   const [pokemon, setPokemon] = useState(null)
   
   useEffect(() => {
@@ -17,6 +19,7 @@ const PokemonReview = ({ pokemonURL }) => {
   
   return (
     <article
+      onClick={() => showPokemonById(pokemon?.id)}
       className="text-center bg-white rounded-3xl relative font-semibold capitalize pb-2 shadow-lg shadow-slate-400/10 border-2 border-transparent hover:border-slate-400 cursor-pointer group grid gap-2">
       <header className="h-10">
         <img
