@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { formatAbilities, formatStats, formatTypes, getEvolutions, getPokemonDescription } from "../helpers/Pokemon";
+import { formatAbilities, formatStats, formatTypes, getEvolutions, getImageByPokemon, getPokemonDescription } from "../helpers/Pokemon";
 import axios from "axios";
 
 const PokemonContext = createContext()
@@ -14,7 +14,9 @@ const PokemonProvider = ({ children }) => {
     const { data: dataSpecies } = await axios.get(pokemonInfo.species.url)
     const { data: dataEvolution } = await axios.get(dataSpecies.evolution_chain.url)
     const { id, name, height, weight, stats, types, abilities } = pokemonInfo
-    
+    const evolutions = await getEvolutions(dataEvolution)
+
+
     setPokemonDetail({
       id,
       name,
@@ -24,7 +26,8 @@ const PokemonProvider = ({ children }) => {
       types: formatTypes(types),
       abilities: formatAbilities(abilities),
       description: getPokemonDescription(dataSpecies),
-      evolutions: getEvolutions(dataEvolution)
+      evolutions,
+      image: getImageByPokemon(pokemonInfo.sprites)
     })
 
     setShowDetailPokemon(true)
