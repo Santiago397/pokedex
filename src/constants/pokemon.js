@@ -21,6 +21,17 @@ const colorByType = {
   shadow: "",
 };
 
+const colorByStat = {
+  HP: "[&>div]:bg-red-500 bg-slate-100",
+  ATK: "[&>div]:bg-orange-500 bg-slate-100",
+  DEF: "[&>div]:bg-yellow-500 bg-slate-100",
+  SpA: "[&>div]:bg-sky-300 bg-slate-100",
+  SpD: "[&>div]:bg-green-500 bg-slate-100",
+  SPD: "[&>div]:bg-pink-500 bg-slate-100",
+  TOT: "[&>div]:bg-blue-500 bg-blue-300",
+}
+
 export {
-  colorByType
+  colorByType,
+  colorByStat
 }
